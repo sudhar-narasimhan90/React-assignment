@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '../../../test-utils';
+import { render, screen } from '../../../test-utils';
 import { ListBody } from '../ListBody';
 import { useTickets } from '../../../hooks/useTickets';
 import { useCancelTicket } from '../../../hooks/useCancelTicket';

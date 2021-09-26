@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) =>
 const ListHeader: FC = () => {
   const classes = useStyles();
   return (
-    <Grid container className={classes.root}>
+    <Grid container className={classes.root} data-testid="ticket-list-header">
       <Grid item xs={6} md={2}>
         <Typography className={classes.text}>{TicketListHeader[0]}</Typography>
       </Grid>

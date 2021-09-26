@@ -22,7 +22,7 @@ const DeleteTicket: FC<TicketId> = ({ id }) => {
     onSuccess: () => {
       queryClient.invalidateQueries(TICKETS_ENDPOINT);
     },
-    onError: (err) => {
+    onError: (err: Error) => {
       // Console logging the error here. Probably, we need update analytics in production systems indicating the error
       console.log(err);
       // send analytics here;

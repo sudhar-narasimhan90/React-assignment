@@ -7,7 +7,7 @@ import { useCancelTicket } from '../../hooks/useCancelTicket'
 import { TicketId } from '../../shared/types';
 import { DeleteIcon } from './DeleteIcon';
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     icon: {
       cursor: 'pointer'
@@ -21,13 +21,18 @@ const DeleteTicket: FC<TicketId> = ({ id }) => {
   const { mutate } = useCancelTicket({
     onSuccess: () => {
       queryClient.invalidateQueries(TICKETS_ENDPOINT);
+    },
+    onError: (err) => {
+      // Console logging the error here. Probably, we need update analytics in production systems indicating the error
+      console.log(err);
+      // send analytics here;
     }
   });
   
   return (
     <div>    
       <DeleteIcon width="30" height="30" className={classes.icon} onClick={() => {
-          mutate({id: id});
+        mutate({id: id});
       }}></DeleteIcon>    
     </div>
   )

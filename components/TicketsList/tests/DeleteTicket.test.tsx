@@ -27,7 +27,7 @@ describe('Delete ticket functionality', () => {
     });
   });
 
-  it('should display delete ticket icon when displaying the list of tickets', () => {
+  it('should display delete icon when displaying the list of tickets', () => {
     (useTickets as jest.Mock).mockReturnValue({
       isLoading: false,
       data: tickets,

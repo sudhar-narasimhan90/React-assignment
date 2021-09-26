@@ -1,4 +1,4 @@
-import { useMutation, UseMutateFunction,UseMutationResult,UseMutationOptions, UseQueryResult } from 'react-query';
+import { useMutation, UseMutationResult, UseMutationOptions } from 'react-query';
 import axios from 'axios';
 import { Ticket, TicketId } from '../shared/types';
 

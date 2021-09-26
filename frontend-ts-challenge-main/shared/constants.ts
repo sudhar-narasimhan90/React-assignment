@@ -1,1 +1,0 @@
-export const TicketListHeader = ["ID", "Requested by", "Create date", "Due date", "Status"];

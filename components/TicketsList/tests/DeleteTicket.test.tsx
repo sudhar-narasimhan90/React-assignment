@@ -19,7 +19,7 @@ const renderListBody = () => {
   );
 }
 
-describe('ListBody', () => {
+describe('Delete ticket functionality', () => {
 
   beforeEach(() => {
     (useCancelTicket as jest.Mock).mockReturnValue({
@@ -27,38 +27,36 @@ describe('ListBody', () => {
     });
   });
 
-  it('should display loading indicator', () => {
-    (useTickets as jest.Mock).mockReturnValue({
-      isLoading: true,
-      data: undefined,
-    });
-    render(renderListBody());
-
-    expect(screen.getByTestId('loading-indicator')).toBeInTheDocument();
-  });
-
-  it('should display the list of tickets', () => {
+  it('should display delete ticket icon when displaying the list of tickets', () => {
     (useTickets as jest.Mock).mockReturnValue({
       isLoading: false,
       data: tickets,
     });
+
     render(renderListBody());
 
     expect(screen.queryByTestId('loading-indicator')).not.toBeInTheDocument();
-    tickets.forEach((ticket) => {
-      expect(screen.getByText(`${ticket.user.firstName} ${ticket.user.lastName}`)).toBeInTheDocument();
-    });
+    expect(screen.queryAllByTestId('delete-icon').length).toEqual(tickets.length);
   });
 
-  it('should display Nothing found when there are no tickets', () => {
+  it('should call mutate when a particular ticket is deleted', () => {
+    const mutateFunction = jest.fn();
     (useTickets as jest.Mock).mockReturnValue({
       isLoading: false,
-      data: [],
+      data: tickets,
     });
+    (useCancelTicket as jest.Mock).mockReturnValue({
+      mutate: mutateFunction
+    });
+
     render(renderListBody());
-    
-    expect(screen.getByText('Nothing found')).toBeInTheDocument();
 
+    expect(screen.queryByTestId('loading-indicator')).not.toBeInTheDocument();
+    expect(screen.queryAllByTestId('delete-icon').length).toEqual(tickets.length);
+
+    // Click on the first delete icon
+    fireEvent.click(screen.queryAllByTestId('delete-icon')[0]);
+    expect(mutateFunction).toHaveBeenCalled();
   });
-
+  
 });

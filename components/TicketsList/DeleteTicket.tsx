@@ -30,11 +30,11 @@ const DeleteTicket: FC<TicketId> = ({ id }) => {
   });
   
   return (
-    <div>    
+    <>    
       <DeleteIcon width="30" height="30" className={classes.icon} onClick={() => {
         mutate({id: id});
       }}></DeleteIcon>    
-    </div>
+    </>
   )
 };
 
